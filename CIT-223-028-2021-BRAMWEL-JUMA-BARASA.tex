@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\title{Compiler Construction Assignment}
+\author{Bramwel Juma Barasa}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty} % Removes page number from title page
+
+\begin{center}
+\Large CIT-223-028/2021% Replace XXXXXXXX with your registration number
+\end{center}
+\section{Distinguishing Between a Compiler and an Interpreter}
+\subsection{Compiler}
+\noindent The Compiler is a translator which takes input i.e., High-Level Language, and produces an output of low-level language i.e. machine or assembly language. The work of a Compiler is to transform the codes written in the programming language into machine code (format of 0s and 1s) so that computers can understand.
+
+A compiler is more intelligent than an assembler it checks all kinds of limits, ranges, errors, etc.
+But its program run time is more and occupies a larger part of memory. It has a slow speed because a compiler goes through the entire program and then translates the entire program into machine codes.
+\subsection{Interpreter}
+\noindent An Interpreter is a program that translates a programming language into a comprehensible language. The interpreter converts high-level language to an intermediate language. It contains pre-compiled code, source code, etc.
+
+It translates only one statement of the program at a time.
+Interpreters, more often than not are smaller than compilers. The simple role of an interpreter is to translate the material into a target language. An Interpreter works line by line on a code. It also converts high-level language to machine language.
+\section{Structure of a compiler}
+\vspace{0.2cm}
+\begin{figure}
+\includegraphics[width=1\textwidth]{/home/bram/Desktop/compiler_phases.jpg}
+\caption{Compiler structure and phases}
+\label{compiler structure}
+
+\end{figure}
+\clearpage
+\section{Regular language and context-free language and their respective parsers}
+\subsection{
+Regular Language and Regular Language Parsers:}
+\begin{enumerate}
+\item \textbf{Features of Regular languages}
+\begin{itemize}
+\item Regular languages are the simplest class of formal languages, described by regular expressions.
+            \item They can be recognized by finite automata, including deterministic finite automata (DFAs) and non-deterministic finite automata (NFAs).
+            \item Regular languages are closed under union, concatenation, and Kleene star operations.
+            \item They are often used to describe patterns in strings with simple structures, such as regular expressions used for pattern matching in text processing.
+
+
+
+\end{itemize}
+
+\end{enumerate}
+\begin{enumerate}
+\item \textbf{Features of Regular Language Parsers}:
+        \begin{itemize}
+            \item Regular language parsers are typically simple and efficient, as they only need to recognize patterns described by regular expressions.
+            \item They are often implemented using finite automata, which can be constructed directly from regular expressions.
+            \item Common algorithms for regular language parsing include Thompson's construction algorithm for NFAs and the subset construction algorithm for converting NFAs to DFAs.
+            \item Regular language parsers are suitable for tasks such as lexical analysis or tokenization in compilers, where patterns in the input need to be recognized and classified into tokens.
+        \end{itemize}
+\end{enumerate}
+\subsection{Context-Free Language and Context-Free Language Parsers:}
+\begin{enumerate}
+\item \textbf{Features of Context-Free Languages:}
+\begin{itemize}
+   \item Context-free languages are a more expressive class of formal languages, described by context-free grammars.
+            \item They are more powerful than regular languages and can describe a wider range of syntactic structures, including nested or recursive patterns.
+            \item Context-free languages are used to define the syntax of programming languages and many other structured documents.
+            \item They are often recognized by pushdown automata, such as pushdown automata with deterministic or non-deterministic behavior.
+        
+\end{itemize}
+
+\end{enumerate}
+\begin{enumerate}
+\item \textbf{Features of Context-Free Language Parsers}
+\begin{itemize}
+ \item Context-free language parsers are more complex than regular language parsers, as they need to handle nested structures and recursive patterns.
+            \item They are typically implemented using algorithms such as recursive descent parsing, LL parsing, LR parsing, or CYK parsing.
+            \item Context-free language parsers often build parse trees or abstract syntax trees (ASTs) to represent the hierarchical structure of the input according to the grammar rules.
+            \item These parsers are used in compilers, interpreters, and other language processing tools to analyze the syntax of the input and generate a structured representation of the program or document.
+        
+\end{itemize}
+\end{enumerate}
+\section{Main Role of Lexical Analyzer:}
+The main role of a lexical analyzer, also known as a lexer or scanner, is to break down the input stream of characters from the source code into meaningful tokens or lexemes. These tokens represent the smallest units of syntax in the programming language, such as keywords, identifiers, literals, and operators.
+
+\subsection{Reasons for Separating Lexical Analyzer from Syntactical Analyzer:}
+\begin{enumerate}
+    \item \textbf{Modularity and Separation of Concerns:} By separating lexical analysis from syntactical analysis, the compiler or interpreter can be divided into smaller, more manageable components. This modular design makes the overall system easier to understand, maintain, and extend.
+    
+    \item \textbf{Efficiency:} Lexical analysis can be implemented more efficiently as a separate phase because it operates at a lower level of abstraction than syntactical analysis. Lexical analyzers can use techniques such as finite automata or regular expressions to efficiently recognize tokens, whereas syntactical analysis typically involves more complex parsing algorithms.
+    
+    \item \textbf{Error Handling:} Separating lexical analysis allows for more precise error reporting. If an error occurs during lexical analysis, such as an illegal character or token, it can be reported immediately without the need to proceed with syntactical analysis. This helps in identifying and debugging errors more accurately.
+    
+    \item \textbf{Language Independence:} Lexical analysis is largely language-independent, as the rules for recognizing tokens are typically specified using regular expressions or finite automata. Separating lexical analysis allows the same lexical analyzer to be reused across different programming languages, reducing redundancy and simplifying the development process.
+    
+    \item \textbf{Parallelization:} Lexical analysis can be parallelized more easily than syntactical analysis, as each character or token in the input stream can be processed independently. By separating lexical analysis from syntactical analysis, compilers and interpreters can take advantage of parallel processing techniques to improve performance.
+\end{enumerate}
+\section{Error Recovery Strategy for a Lexical Analyzer:}
+
+\begin{enumerate}
+    \item \textbf{Skip Invalid Characters:} When an invalid character is encountered, the lexical analyzer can skip over it and continue analyzing the input stream. This ensures that the analysis can proceed without being completely derailed by a single error.
+    
+    \item \textbf{Report Error:} The lexical analyzer should report the error encountered, providing information such as the line number and column number where the error occurred, as well as a description of the error itself. This helps in debugging and fixing the source code.
+    
+    \item \textbf{Synchronize:} After encountering an error, the lexical analyzer should attempt to synchronize its position in the input stream to a known or expected state. This may involve discarding characters until a known token boundary or delimiter is reached, ensuring that the analysis can continue from a consistent starting point.
+    
+    \item \textbf{Recovery Tokens:} In some cases, the lexical analyzer may be able to recover by identifying a token boundary or delimiter that indicates the start of a new valid token. By identifying and extracting such recovery tokens, the lexical analyzer can resume normal processing of the input stream.
+    
+    \item \textbf{Resume Analysis:} Once the error has been handled and recovery tokens have been identified, the lexical analyzer can resume normal analysis of the input stream, continuing to identify and generate tokens as usual.
+    
+    \item \textbf{Provide Feedback:} Finally, the lexical analyzer should provide feedback to the user or calling program, indicating that an error occurred and describing the steps taken to recover from it. This helps in diagnosing and resolving any issues in the source code.
+\end{enumerate}
+
+
+
+\end{document}
